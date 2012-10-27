@@ -12,7 +12,7 @@ Usage
 3.  **Direction** is the orientation of the arrow (top, right, bottom, left)
 4.  **Offset** is the position of the arrow on its axis (px or %)
 4.  **Border-size** is the width of the border if there is one (optional; default "0")
-5.  **Border-color** is the color of the border if there is one (optional; default "inherit"); 
+5.  **Border-color** is the color of the border if there is one (optional; default "inherit")
 
 
 Extra
