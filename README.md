@@ -22,4 +22,4 @@ Drop-shadows can be used on the element to create a shadow on the arrow as well
 
 Example
 -------
-'.arrow(10px, #08C, bottom, 50%, 1px, darken(#08C, 10%))'
+'.arrow(10px, #08C, bottom, 50%, 1px, darken(#08C, 10%))'	
