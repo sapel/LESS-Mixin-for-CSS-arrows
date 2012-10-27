@@ -5,7 +5,7 @@ A customizable LESS mixin to handle CSS arrows.
 
 Usage
 -----
-`<code>` .arrow(size, color, direction, offset, border-size, border-color); `</code>`
+`.arrow(size, color, direction, offset, border-size, border-color);`
 
 1.  **Size** is the with of the arrow
 2.  **Color** is the color of the arrow (plain color required)
