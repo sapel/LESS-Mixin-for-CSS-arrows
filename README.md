@@ -1,7 +1,7 @@
-LESS-Mixin-for-CSS-arrows
+Sass-Mixin-for-CSS-arrows
 =========================
 
-A customizable LESS mixin to handle CSS arrows.
+A customizable Sass mixin to handle CSS arrows.
 
 Usage
 -----
