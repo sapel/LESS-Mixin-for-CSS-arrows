@@ -7,7 +7,7 @@ Usage
 -----
 `.arrow(size, color, direction, offset, border-size, border-color);`
 
-1.  **Size** is the with of the arrow
+1.  **Size** is the width of the arrow
 2.  **Color** is the color of the arrow (plain color required)
 3.  **Direction** is the orientation of the arrow (top, right, bottom, left)
 4.  **Offset** is the position of the arrow on its axis (px or %)
