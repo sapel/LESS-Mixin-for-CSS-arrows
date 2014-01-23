@@ -1,128 +1,121 @@
-/* ------------------------ */
-/* LESS mixin for CSS arrow */
-/* ------------------------ */
-
-/* Usage
- * .arrow(size, color, direction, offset, border-size, border-color); 
+/* Sass Mixin for CSS arrow
+ *
+ * Usage:
+ * .arrow(size, color, direction, offset, border-size(optional), border-color(optional));
+ *
+ * 1. size: you can set pretty much whatever you want. Further tests required for em unit.
+ * 2. color: sadly, no way to inherit. Use the same color as the background of your element.
+ * 3. direction: the direction of the arrow (top, right, bottom, left).
+ * 4. offset: the position on the side (20px, 50%, etc.).
+ * 5. border-size (optional): you may have to set it 1px thinner than the actual border to smooth the rendering.
+ * 6. border-color (optional): "inherit" as a default value.
+ *
+ *
+ * Still many things to do and edge cases to fix.
+ * It uses the :after pseudo-element to create the arrow. If there is a border, it uses the :before pseudo-element
+ *
+ * Changelog:
+ * - forked and translated to sass
+ * - GitHub repo: https://github.com/HugoGiraudel/LESS-Mixin-for-CSS-arrows
+ * - GitHub repo: https://github.com/sapel/Sass-Mixin-for-CSS-arrows
  */
 
-/* Where
- * Size is the with of the arrow
- * Color is the color of the arrow (plain color required)
- * Direction is the orientation of the arrow (top, right, bottom, left)
- * Offset is the position of the arrow on its axis (px / em)
- * Border-size is the width of the border if there is one (optional; default "0")
- * Border-color is the color of the border if there is one (optional; default "inherit"); 
- */
 
-/* Extra
- * Drop-shadows can be used on the element to create a shadow on the arrow as well 
- */
+@mixin arrow($size: 20px, $color: red, $direction: "top", $offset: 50%, $border-size: 0, $border-color: inherit) {
+  $m-size: $size+($border-size*2);
 
-.arrow(@size, @color, @direction, @offset, @border-size: 0, @border-color: inherit) {
   position: relative;
   &:after, 
   &:before {
     content: "";
     position: absolute;
     width: 0;
-    height: 0;
-  }
-}
-
-.arrow(@size, @color, @direction, @offset, @border-size: 0, @border-color: inherit) when (@direction = top) {
-  @m-size: @size + (@border-size*2);
-
-  &:after {
-    bottom: 100%;
-    left: @offset;
-    margin-left: -@size;
-
-    border-left: @size solid transparent;
-    border-right: @size solid transparent;
-    border-bottom: @size solid @color;
+    height: 0; 
   }
   
-  &:before {
-    bottom: 100%;
-    left: @offset;
-    margin-left: -@m-size;
+  @if ($direction == "top") {
+    &:after {
+      bottom: 100%;
+      left: $offset;
+      margin-left: -$size;
 
-    border-left: @m-size solid transparent;
-    border-right: @m-size solid transparent;
-    border-bottom: @m-size solid;
-    border-bottom-color: @border-color;
+      border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-bottom: $size solid $color;
+    }
+
+    &:before {
+      bottom: 100%;
+      left: $offset;
+      margin-left: -$m-size;
+
+      border-left: $m-size solid transparent;
+      border-right: $m-size solid transparent;
+      border-bottom: $m-size solid;
+      border-bottom-color: $border-color;
+    }
   }
-}
+  @else if ($direction == "bottom") {
+    &:after {
+      top: 100%;
+      left: $offset;
+      margin-left: -$size;
 
-.arrow(@size, @color, @direction, @offset, @border-size: 0, @border-color: inherit) when (@direction = bottom) {
-  @m-size: @size + (@border-size*2);
+      border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-top: $size solid $color;
+    }
 
-  &:after {
-    top: 100%;
-    left: @offset;
-    margin-left: -@size;
-
-    border-left: @size solid transparent;
-    border-right: @size solid transparent;
-    border-top: @size solid @color;
+    &:before {
+      top: 100%;
+      left: $offset;
+      margin-left: -$m-size;
+      border-left: $m-size solid transparent;
+      border-right: $m-size solid transparent;
+      border-top: $m-size solid;
+      border-top-color: $border-color;
+    }
   }
+  @else if ($direction == "right") {
+    &:after {
+      left: 100%;
+      top: $offset;
+      margin-top: -$size;
 
-  &:before {
-    top: 100%;
-    left: @offset;
-    margin-left: -@m-size;
-    border-left: @m-size solid transparent;
-    border-right: @m-size solid transparent;
-    border-top: @m-size solid;
-    border-top-color: @border-color;
+      border-top: $size solid transparent;
+      border-bottom: $size solid transparent;
+      border-left: $size solid $color;
+    }
+    &:before {
+      left: 100%;
+      top: $offset;
+      margin-top: -$m-size;
+
+      border-top: $m-size solid transparent;
+      border-bottom: $m-size solid transparent;
+      border-left: $m-size solid;
+      border-left-color: $border-color;
+    }
   }
-}
+  @else if ($direction == "left") {
+    &:after {
+      right: 100%;
+      top: $offset;
+      margin-top: -$size;
 
-.arrow(@size, @color, @direction, @offset, @border-size: 0, @border-color: inherit) when (@direction = right) {
-  @m-size: @size + (@border-size*2);
+      border-top: $size solid transparent;
+      border-bottom: $size solid transparent;
+      border-right: $size solid $color;
+    } 
+    &:before {
+      right: 100%;
+      top: $offset;
+      margin-top: -$m-size;
 
-  &:after {
-    left: 100%;
-    top: @offset;
-    margin-top: -@size;
-
-    border-top: @size solid transparent;
-    border-bottom: @size solid transparent;
-    border-left: @size solid @color;
-  }
-  &:before {
-    left: 100%;
-    top: @offset;
-    margin-top: -@m-size;
-
-    border-top: @m-size solid transparent;
-    border-bottom: @m-size solid transparent;
-    border-left: @m-size solid;
-    border-left-color: @border-color;
-  }
-}
-
-.arrow(@size, @color, @direction, @offset, @border-size: 0, @border-color: inherit) when (@direction = left) {
-  @m-size: @size + (@border-size*2);
-
-  &:after {
-    right: 100%;
-    top: @offset;
-    margin-top: -@size;
-
-    border-top: @size solid transparent;
-    border-bottom: @size solid transparent;
-    border-right: @size solid @color;
-  } 
-  &:before {
-    right: 100%;
-    top: @offset;
-    margin-top: -@m-size;
-
-    border-top: @m-size solid transparent;
-    border-bottom: @m-size solid transparent;
-    border-right: @m-size solid;
-    border-right-color: @border-color;
+      border-top: $m-size solid transparent;
+      border-bottom: $m-size solid transparent;
+      border-right: $m-size solid;
+      border-right-color: $border-color;
+    }
   }
 }
